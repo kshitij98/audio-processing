@@ -14,7 +14,9 @@ y = getaudiodata(recorder);
 audiowrite('./sounds/output/reocrding.wav', y, Fs);
 
 % [y, Fs] = audioread('./song.wav');
-[church, Fs_church] = audioread('./sounds/impulse-responses/ir_church.wav');
+[church, Fs_church] = audioread('./sounds/impulse-responses/church.wav');
+[chamber, Fs_chamber] = audioread('./sounds/impulse-responses/chamber.wav');
+[hall, Fs_hall] = audioread('./sounds/impulse-responses/hall.wav');
 
 samplingRates = [24000 16000 8000 4000];
 samplingRatesRatio = Fs ./ samplingRates
@@ -34,7 +36,13 @@ audiowrite('./sounds/output/reocrding-16000.wav', H16, samplingRates(2));
 audiowrite('./sounds/output/reocrding-8000.wav', H8, samplingRates(3));
 audiowrite('./sounds/output/reocrding-4000.wav', H4, samplingRates(4));
 
-church_sound = conv(y, church);
 
-sound(church_sound, Fs);
+church_sound = conv(y, church);
 audiowrite('./sounds/output/reocrding-church.wav', church_sound, 44100);
+% sound(church_sound, Fs);
+
+chamber_sound = conv(y, chamber);
+audiowrite('./sounds/output/reocrding-chamber.wav', chamber_sound, 44100);
+
+hall_sound = conv(y, hall);
+audiowrite('./sounds/output/reocrding-hall.wav', hall_sound, 44100);
